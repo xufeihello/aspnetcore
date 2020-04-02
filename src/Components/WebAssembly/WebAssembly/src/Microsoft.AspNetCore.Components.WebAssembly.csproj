@@ -5,13 +5,13 @@
     <Description>Build client-side single-page applications (SPAs) with Blazor running under WebAssembly.</Description>
     <IsShippingPackage>true</IsShippingPackage>
     <NoWarn>$(NoWarn);BL0006</NoWarn>
-    <NuspecFile>$(MSBuildProjectName).nuspec</NuspecFile>
-    <GenerateNuspecDependsOn>$(GenerateNuspecDependsOn);_GetNuspecDependencyPackageVersions</GenerateNuspecDependsOn>
+    <!-- <NuspecFile>$(MSBuildProjectName).nuspec</NuspecFile>
+    <GenerateNuspecDependsOn>$(GenerateNuspecDependsOn);_GetNuspecDependencyPackageVersions</GenerateNuspecDependsOn> -->
   </PropertyGroup>
 
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Components.Web" />
-    <Reference Include="Microsoft.AspNetCore.Comopnents.WebAssembly.HttpHandler" />
+    <Reference Include="Microsoft.AspNetCore.Comopnents.WebAssembly.HttpHandler" IncludeAssets="compile" />
     <Reference Include="Microsoft.Extensions.Configuration.Json" />
     <Reference Include="Microsoft.Extensions.Logging" />
     <Reference Include="Microsoft.JSInterop.WebAssembly" />
