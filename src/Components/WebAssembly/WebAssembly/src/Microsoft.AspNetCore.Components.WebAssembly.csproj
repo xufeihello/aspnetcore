@@ -5,16 +5,17 @@
     <Description>Build client-side single-page applications (SPAs) with Blazor running under WebAssembly.</Description>
     <IsShippingPackage>true</IsShippingPackage>
     <NoWarn>$(NoWarn);BL0006</NoWarn>
-    <!-- <NuspecFile>$(MSBuildProjectName).nuspec</NuspecFile>
-    <GenerateNuspecDependsOn>$(GenerateNuspecDependsOn);_GetNuspecDependencyPackageVersions</GenerateNuspecDependsOn> -->
   </PropertyGroup>
 
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Components.Web" />
-    <Reference Include="Microsoft.AspNetCore.Comopnents.WebAssembly.HttpHandler" IncludeAssets="compile" />
     <Reference Include="Microsoft.Extensions.Configuration.Json" />
     <Reference Include="Microsoft.Extensions.Logging" />
     <Reference Include="Microsoft.JSInterop.WebAssembly" />
+    <ProjectReference
+      Include="..\..\WebAssemblyHttpHandler\src\Microsoft.AspNetCore.Comopnents.WebAssembly.HttpHandler.csproj"
+      IncludeAssets="commit"
+      ReferenceOutputAssembly="false" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,22 +30,5 @@
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication.Tests" />
     <InternalsVisibleTo Include="BasicTestApp" />
   </ItemGroup>
-
-  <Target Name="_GetNuspecDependencyPackageVersions">
-    <MSBuild Targets="_GetPackageVersionInfo"
-        BuildInParallel="$(BuildInParallel)"
-        Projects="@(ProjectReference)">
-      <Output TaskParameter="TargetOutputs" ItemName="_ProjectPathWithVersion" />
-    </MSBuild>
-    <ItemGroup>
-      <NuspecProperty Include="AssemblyName=$(AssemblyName)" />
-      <NuspecProperty Include="OutputPath=$(OutputPath)" />
-      <NuspecProperty Include="MicrosoftExtensionsConfigurationJsonPackageVersion=$(MicrosoftExtensionsConfigurationJsonPackageVersion)" />
-      <NuspecProperty Include="MicrosoftExtensionsConfigurationJsonPackageVersion=$(MicrosoftExtensionsConfigurationJsonPackageVersion)" />
-      <NuspecProperty Include="MicrosoftAspNetCoreComponentsWebPackageVersion=$(MicrosoftAspNetCoreComponentsWebPackageVersion)" />
-      <NuspecProperty Include="@(_ProjectPathWithVersion->WithMetadataValue('PackageId', 'Microsoft.JSInterop.WebAssembly')->'MicrosoftJSInteropWebAssemblyPackageVersion=%(PackageVersion)')" />
-      <NuspecProperty Include="@(_ProjectPathWithVersion->WithMetadataValue('PackageId', 'Microsoft.AspNetCore.Comopnents.WebAssembly.HttpHandler')->'MicrosoftAspNetCoreComopnentsWebAssemblyHttpHandlerPackageVersion=%(PackageVersion)')" />
-    </ItemGroup>
-  </Target>
 
 </Project>
