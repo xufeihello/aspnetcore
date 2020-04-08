@@ -24,7 +24,8 @@
 
   <Target
       Name="_BlazorCopyStandaloneWebConfig"
-      AfterTargets="_BlazorCleanupPublishOutput;ComputeResolvedFilesToPublishList">
+      AfterTargets="_BlazorCleanupPublishOutput;ComputeResolvedFilesToPublishList"
+      Condition="!Exists('web.config')">
 
     <ItemGroup>
       <ResolvedFileToPublish Include="$(MSBuildThisFileDirectory)Standalone.Web.config">
