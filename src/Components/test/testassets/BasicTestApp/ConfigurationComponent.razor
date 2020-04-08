@@ -1,4 +1,5 @@
-@inject Microsoft.Extensions.Configuration.IConfiguration Config
+@using Microsoft.Extensions.Configuration.Memory
+@inject Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostConfiguration Config
 @inject Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment HostEnvironment
 
 <ul>
@@ -8,3 +9,20 @@
 </ul>
 
 <div id="environment">@HostEnvironment.Environment</div>
+
+<p>
+    <input id="key1-input" @bind-value=newKey1 @bind-value:event="oninput" />
+    <button id="trigger-change" @onclick="@(() => TriggerChange())">Change key1</button>
+</p>
+
+@code {
+    string newKey1 { get; set; }
+
+    void TriggerChange()
+    {
+        var initialData = new Dictionary<string, string>() { { "key1", newKey1 } };
+        var memoryConfig = new MemoryConfigurationSource { InitialData = initialData };
+        Config.Add(memoryConfig);
+    }
+}
+

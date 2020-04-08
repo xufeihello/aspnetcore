@@ -204,7 +204,7 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
             var host = builder.Build();
 
             // Assert
-            var configuration = host.Services.GetRequiredService<IConfiguration>();
+            var configuration = host.Services.GetRequiredService<WebAssemblyHostConfiguration>();
             Assert.Equal("value", configuration["key"]);
         }
 
